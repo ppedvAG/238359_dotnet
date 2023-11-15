@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace RestClient
 {
 
-
     public class BooksResult
     {
         public string kind { get; set; }
@@ -40,8 +39,6 @@ namespace RestClient
         public int pageCount { get; set; }
         public string printType { get; set; }
         public string[] categories { get; set; }
-        public int averageRating { get; set; }
-        public int ratingsCount { get; set; }
         public string maturityRating { get; set; }
         public bool allowAnonLogging { get; set; }
         public string contentVersion { get; set; }
@@ -51,6 +48,9 @@ namespace RestClient
         public string previewLink { get; set; }
         public string infoLink { get; set; }
         public string canonicalVolumeLink { get; set; }
+        public bool comicsContent { get; set; }
+        public int averageRating { get; set; }
+        public int ratingsCount { get; set; }
     }
 
     public class Readingmodes
@@ -150,6 +150,8 @@ namespace RestClient
     {
         public string textSnippet { get; set; }
     }
+
+
 
 
 }

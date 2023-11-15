@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using RestClient;
+using System.Xml.Serialization;
 
 Console.WriteLine("Hello, World!");
 
@@ -9,6 +10,10 @@ var http = new HttpClient();
 var json = http.GetStringAsync(url).Result;
 
 var br = System.Text.Json.JsonSerializer.Deserialize<BooksResult>(json);
+
+XmlSerializer xmlSerializer = new XmlSerializer(typeof(BooksResult));
+var sw = new StreamWriter("test.xml");
+xmlSerializer.Serialize(sw, br);
 
 Console.WriteLine($"Books: {br.totalItems}");
 
