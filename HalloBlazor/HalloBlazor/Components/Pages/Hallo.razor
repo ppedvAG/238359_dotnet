@@ -1,0 +1,44 @@
+﻿@page "/pizza"
+@using Microsoft.Data.SqlClient
+@rendermode InteractiveServer
+
+<h3>Pizza</h3>
+
+<button class="btn btn-primary" @onclick="LoadPizzas">Lade Pizzas</button>
+
+@foreach (var p in pizzas)
+{
+    <p>@p</p>
+}
+
+
+@code {
+    List<string> pizzas =  ["Salami","Käse","123"];
+
+
+    private void LoadPizzas()
+    {
+        pizzas.Clear();
+        var conString = "Server=(localdb)\\mssqllocaldb;Database=HalloAspMVCContext-2970eb9c-dc4c-4426-9901-2a8fb20585ad;Trusted_Connection=True;MultipleActiveResultSets=true";
+        var con = new SqlConnection(conString);
+        con.Open();
+        pizzas.Add("Db Verbindung OK");
+        var cmd = con.CreateCommand();
+        cmd.CommandText = "SELECT * FROM Pizza";
+        var reader = cmd.ExecuteReader();
+        while(reader.Read())
+        {
+            var name = reader.GetString(reader.GetOrdinal("Name"));
+            var price = reader.GetDecimal(reader.GetOrdinal("Price"));
+            pizzas.Add($"{name} {price:c}");
+        }
+
+    }
+
+    private void DoCalc()
+    {
+        HalloStandardLib.Calc calc = new HalloStandardLib.Calc();
+        var result = calc.Sum(3, 4);
+    }
+
+}
