@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HalloAspMVC.Data;
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<HalloAspMVCContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("HalloAspMVCContext") ?? throw new InvalidOperationException("Connection string 'HalloAspMVCContext' not found.")));
 
