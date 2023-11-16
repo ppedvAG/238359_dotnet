@@ -1,10 +1,13 @@
 ﻿@page "/pizza"
 @using Microsoft.Data.SqlClient
 @rendermode InteractiveServer
+@using MudBlazor
 
 <h3>Pizza</h3>
 
 <button class="btn btn-primary" @onclick="LoadPizzas">Lade Pizzas</button>
+
+<MudButton Variant="Variant.Filled" @onclick="LoadPizzas">Lade Pizzas</MudButton>
 
 @foreach (var p in pizzas)
 {
@@ -12,12 +15,24 @@
 }
 
 
+<MudDataGrid Items="@pizzas">
+     <Columns>
+        
+        <PropertyColumn Property="x => x" Title="Nr" Sortable="false" Filterable="false" />
+        <PropertyColumn Property="x => x" Title="Nr" Sortable="false" Filterable="false" />
+        <PropertyColumn Property="x => x" Title="Nr" Sortable="false" Filterable="false" />
+        @* <PropertyColumn Property="x => x.Sign" />
+        <PropertyColumn Property="x => x.Name" SortBy="@_sortBy" /> *@
+            </Columns>
+</MudDataGrid>
+
 @code {
     List<string> pizzas =  ["Salami","Käse","123"];
 
 
     private void LoadPizzas()
     {
+
         pizzas.Clear();
         var conString = "Server=(localdb)\\mssqllocaldb;Database=HalloAspMVCContext-2970eb9c-dc4c-4426-9901-2a8fb20585ad;Trusted_Connection=True;MultipleActiveResultSets=true";
         var con = new SqlConnection(conString);
